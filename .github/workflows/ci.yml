@@ -14,7 +14,7 @@ jobs:
       matrix:
         gtk_version: [2, 3]
         include:
-          gimp_git_tag: 'GIMP_2_10_22'
+         - gimp_git_tag: 'GIMP_2_10_22'
     
     container:
       image: photoflow/docker-centos7-gimp
@@ -39,7 +39,7 @@ jobs:
           retention-days: 7
       
   upload:
-    if: ${{ github.event_name == "push" && github.ref == "refs/heads/master" }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     needs: build
     runs-on: ubuntu-latest
     steps:
