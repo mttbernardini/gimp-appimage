@@ -14,7 +14,8 @@ jobs:
       matrix:
         gtk_version: [2, 3]
         include:
-         - gimp_git_tag: 'GIMP_2_10_22'
+          - gimp_git_tag: 'GIMP_2_10_22'
+            gtk_version: ''
     
     container:
       image: photoflow/docker-centos7-gimp
