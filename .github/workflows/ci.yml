@@ -29,17 +29,17 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
-        with:
-          path: /sources/
 
       - name: build AppImage
-        run: /sources/mkappimage.sh
+        run: |
+          ln -s "$PWD" /sources
+          exec /sources/mkappimage.sh
 
       - name: archive built artifacts
         uses: actions/upload-artifact@v2
         with:
           name: gimp-appimage
-          path: /sources/out/*
+          path: out/*
           retention-days: 7
       
   upload:
