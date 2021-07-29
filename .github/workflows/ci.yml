@@ -28,9 +28,10 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
+        path: sources/
 
       - name: build AppImage
-        run: ./mkappimage.sh
+        run: sources/mkappimage.sh
 
       - name: archive built artifacts
         uses: actions/upload-artifact@v2
