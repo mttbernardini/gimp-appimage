@@ -22,7 +22,7 @@ jobs:
       image: photoflow/docker-centos7-gimp
       env:
         GTK_VERSION: ${{ matrix.gtk_version }}
-        GIMP_GIT_TAG: $${{ matrix.gimp_git_tag }}
+        GIMP_GIT_TAG: ${{ matrix.gimp_git_tag }}
         BABL_GIT_TAG: 'BABL_0_1_82'
         GEGL_GIT_TAG: 'GEGL_0_4_26'
     
