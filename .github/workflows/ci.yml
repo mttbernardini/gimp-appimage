@@ -28,7 +28,8 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
-        path: sources/
+        with:
+          path: sources/
 
       - name: build AppImage
         run: sources/mkappimage.sh
