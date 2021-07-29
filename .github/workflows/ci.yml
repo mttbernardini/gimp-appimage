@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     
     strategy:
+      fail-fast: false
       matrix:
         gtk_version: [2, 3]
         include:
@@ -29,16 +30,16 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v2
         with:
-          path: sources/
+          path: /sources/
 
       - name: build AppImage
-        run: sources/mkappimage.sh
+        run: /sources/mkappimage.sh
 
       - name: archive built artifacts
         uses: actions/upload-artifact@v2
         with:
           name: gimp-appimage
-          path: out/*
+          path: /sources/out/*
           retention-days: 7
       
   upload:
