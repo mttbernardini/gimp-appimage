@@ -5,11 +5,11 @@ on:
   pull_request:
   schedule:
     - cron: "0 12 * * 0"
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     strategy:
       fail-fast: false
       matrix:
@@ -17,7 +17,7 @@ jobs:
         include:
           - gimp_git_tag: 'GIMP_2_10_22'
             gtk_version: ''
-    
+
     container:
       image: photoflow/docker-centos7-gimp
       env:
@@ -25,7 +25,7 @@ jobs:
         GIMP_GIT_TAG: ${{ matrix.gimp_git_tag }}
         BABL_GIT_TAG: 'BABL_0_1_82'
         GEGL_GIT_TAG: 'GEGL_0_4_26'
-    
+
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
@@ -43,7 +43,7 @@ jobs:
           name: gimp-appimage
           path: out/*
           retention-days: 7
-      
+
   upload:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     needs: build
@@ -52,11 +52,19 @@ jobs:
       - name: retrieve artifacts
         uses: actions/download-artifact@v2
         with:
+          name: gimp-appimage
           path: out/
 
-      - name: upload built files
+      - name: dump files
         run: |
           ls -lh
-          ls out/* 
-          wget -c https://github.com/aferrero2707/uploadtool/raw/master/upload_rotate.sh
-          bash  ./upload_rotate.sh "continuous" out/* >& /dev/null
+          ls -lh out/
+
+      - name: retrieve upload tool
+        run: wget -c https://github.com/aferrero2707/uploadtool/raw/master/upload_rotate.sh
+
+      - name: upload built files
+        run: bash ./upload_rotate.sh "continuous" out/*
+        env:
+          TRAVIS_REPO_SLUG: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
