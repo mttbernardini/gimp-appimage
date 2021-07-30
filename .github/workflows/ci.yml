@@ -55,9 +55,7 @@ jobs:
           path: out/
 
       - name: dump files
-        run: |
-          ls -lh
-          ls -lh out/
+        run:  ls -lh out/
 
       - name: retrieve upload tool
         run: wget -c https://github.com/aferrero2707/uploadtool/raw/master/upload_rotate.sh
