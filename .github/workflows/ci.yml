@@ -35,7 +35,8 @@ jobs:
           ln -s "$PWD" /sources
           #exec /sources/mkappimage.sh
           mkdir out
-          touch out/${{ github.job }}
+          test -z $GTK_VERSION && exit 1
+          echo hi > out/${{ github.job }}.txt
 
       - name: archive built artifacts
         uses: actions/upload-artifact@v2
