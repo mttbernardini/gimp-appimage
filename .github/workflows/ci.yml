@@ -34,10 +34,7 @@ jobs:
       - name: build AppImage
         run: |
           ln -s "$PWD" /sources
-          #exec /sources/mkappimage.sh
-          mkdir out
-          test -z $GTK_VERSION && exit 1
-          echo hu > out/${{ github.job }}.txt.2
+          exec /sources/mkappimage.sh
 
       - name: archive built artifacts
         uses: actions/upload-artifact@v2
