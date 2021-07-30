@@ -37,7 +37,7 @@ jobs:
           #exec /sources/mkappimage.sh
           mkdir out
           test -z $GTK_VERSION && exit 1
-          echo hi > out/${{ github.job }}.txt
+          echo hu > out/${{ github.job }}.txt.2
 
       - name: archive built artifacts
         uses: actions/upload-artifact@v2
