@@ -33,7 +33,8 @@ jobs:
       - name: build AppImage
         run: |
           ln -s "$PWD" /sources
-          exec /sources/mkappimage.sh
+          #exec /sources/mkappimage.sh
+          touch out/${{ github.job }}
 
       - name: archive built artifacts
         uses: actions/upload-artifact@v2
